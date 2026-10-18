@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="backend/src/main/java/com/bea/servicedesk/model/Priority.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/model/Role.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/model/Notification.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/model/Incident.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/model/UserAccount.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/model/IncidentEvent.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/model/Status.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/dto/Requests.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/config/JwtService.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/config/SecurityConfig.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/config/DemoData.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/ServiceDeskApplication.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/repo/UserRepository.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/repo/NotificationRepository.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/repo/EventRepository.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/repo/IncidentRepository.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/service/IncidentMetrics.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/service/IncidentService.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/service/AccessService.java">
+</file>
+<file name="backend/src/main/java/com/bea/servicedesk/controller/ApiController.java">
+</file>
+</checkstyle>

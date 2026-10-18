@@ -1,0 +1,52 @@
+# Default stack: MySQL 8.4 + Spring Boot 3.5 backend + React/Nginx frontend.
+# Every secret must be set in .env (copy .env.example and replace all values).
+services:
+  db:
+    image: ${MYSQL_IMAGE:-mysql:8.4}
+    environment:
+      MYSQL_DATABASE: servicedesk
+      MYSQL_USER: servicedesk
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  backend:
+    image: servicedesk-backend:local
+    build:
+      context: ./backend
+      args:
+        BUILD_IMAGE: ${MAVEN_IMAGE:-maven:3.9.9-eclipse-temurin-17}
+        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-gcr.io/distroless/java17-debian13:nonroot}
+    environment:
+      DB_URL: jdbc:mysql://db:3306/servicedesk
+      DB_USER: servicedesk
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env to a random string of at least 32 bytes}
+      JPA_DDL_AUTO: ${JPA_DDL_AUTO:-validate}
+      CORS_ORIGIN: http://localhost:${HTTP_PORT:-8088}
+      DEMO_SEED: ${DEMO_SEED:-false}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: servicedesk-frontend:local
+    build:
+      context: .
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-alpine}
+        NGINX_IMAGE: ${NGINX_IMAGE:-nginx:alpine}
+    ports:
+      - "${HTTP_PORT:-8088}:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

@@ -1,0 +1,6 @@
+# Checkstyle 9.3 (same version maven-checkstyle-plugin 3.5.0 uses), google_checks.xml
+# Command: java -jar checkstyle-9.3-all.jar -c /google_checks.xml backend-spring4-test/src/main/java
+# Run: 2026-10-18T13:15:59+00:00
+Starting audit...
+Audit done.
+# Warnings: 0

@@ -1,0 +1,22 @@
+# Run: 2026-10-18T13:16:09+00:00  node v22.22.0  npm 10.9.4
+$ npm ci
+
+added 70 packages, and audited 71 packages in 3s
+
+found 0 vulnerabilities
+$ npm run build
+
+> enterprise-service-desk@1.0.0 build
+> vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 27 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.37 kB │ gzip:  0.27 kB
+dist/assets/index-DMN28Om0.css  236.25 kB │ gzip: 32.47 kB
+dist/assets/index-nJQ8AcXa.js   158.24 kB │ gzip: 50.26 kB
+✓ built in 1.31s
+$ npm audit
+found 0 vulnerabilities

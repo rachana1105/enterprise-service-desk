@@ -1,0 +1,17 @@
+# Optional override: run the Spring Boot 4.1 backend (backend-spring4-test/) instead of backend/.
+#   docker compose -f compose.yaml -f compose.secure.yaml up --build -d
+# BACK UP MySQL FIRST (scripts/backup-db.ps1 or scripts/backup-db.sh).
+# Schema changes are blocked here on purpose: JPA_DDL_AUTO is forced to "validate", so an
+# upgrade can never silently alter existing tables. Service names and the mysql_data volume
+# are unchanged.
+services:
+  backend:
+    image: servicedesk-backend-sb4:local
+    build:
+      context: ./backend-spring4-test
+      dockerfile: Dockerfile
+      args:
+        BUILD_IMAGE: ${MAVEN_IMAGE:-maven:3.9.9-eclipse-temurin-17}
+        RUNTIME_IMAGE: ${SECURE_RUNTIME_IMAGE:-cgr.dev/chainguard/jre:latest}
+    environment:
+      JPA_DDL_AUTO: validate
