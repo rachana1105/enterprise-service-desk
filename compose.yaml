@@ -1,4 +1,4 @@
-# Default stack: MySQL 8.4 + Spring Boot 3.5 backend + React/Nginx frontend.
+# Default stack: MySQL 8.4 + Spring Boot 4.1 backend + React/Nginx frontend.
 # Every secret must be set in .env (copy .env.example and replace all values).
 services:
   db:
@@ -19,10 +19,12 @@ services:
   backend:
     image: servicedesk-backend:local
     build:
-      context: ./backend
+      # Spring Boot 4.1 backend on the Chainguard JRE: 0 HIGH/CRITICAL in Trivy.
+      # (backend/ is the older Spring Boot 3.5 build, kept for reference only.)
+      context: ./backend-spring4-test
       args:
         BUILD_IMAGE: ${MAVEN_IMAGE:-maven:3.9.9-eclipse-temurin-17}
-        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-gcr.io/distroless/java17-debian13:nonroot}
+        RUNTIME_IMAGE: ${SECURE_RUNTIME_IMAGE:-cgr.dev/chainguard/jre:latest}
     environment:
       DB_URL: jdbc:mysql://db:3306/servicedesk
       DB_USER: servicedesk

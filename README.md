@@ -32,7 +32,7 @@ service-desk-phase2/
 
 `backend/` and `backend-spring4-test/` contain **identical application code**; they differ only
 in the Spring Boot version (pom.xml), two test imports (Jackson 2 vs 3 package names) and the
-runtime base image. The default stack uses `backend/`.
+runtime base image. The default stack uses `backend-spring4-test/` (Spring Boot 4.1, Chainguard JRE), which scans with 0 HIGH/CRITICAL in Trivy.
 
 ## Run with Docker
 
